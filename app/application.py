@@ -13,9 +13,8 @@ import os
 
 from logging.handlers import TimedRotatingFileHandler
 from flask import Flask
-
+from app.article import articles_bp
 from app.extensions import db, cors
-from app.main import main_bp
 
 
 def create_app(config_name=None):
@@ -28,6 +27,7 @@ def create_app(config_name=None):
     configure_blueprint(app)
     # 配置扩展插件
     configure_extensions(app)
+    configure_request_common(app)
     app.logger.info('创建app成功')
     return app
 
@@ -38,7 +38,8 @@ def configure_blueprint(app):
     :param app:
     :return:
     """
-    app.register_blueprint(blueprint=main_bp, url_prefix='/api')
+    app.register_blueprint(blueprint=articles_bp, url_prefix='/api')
+    print(app.url_defaults)
 
 
 def configure_logger(app):
@@ -81,3 +82,10 @@ def configure_extensions(app):
     """
     db.init_app(app)  # db初始化
     cors.init_app(app)  # 允许跨域
+
+
+def configure_request_common(app):
+
+    @app.before_request
+    def before_request():
+        print('11111111111111')

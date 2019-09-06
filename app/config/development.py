@@ -14,7 +14,7 @@ from app.config.default import DefaultConfig
 class DevelopmentConfig(DefaultConfig):
     DEBUG = False
 
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:123456@localhost:3306/monitor'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@localhost:3306/blog?charset=utf8'
 
 
     # 如果设置成 True (默认情况)，Flask-SQLAlchemy 将会追踪对象的修改并且发送信号。

@@ -26,12 +26,15 @@ def res(code=ResponseCode.SUCCESS, msg='成功', data=None):
     return jsonify(result)
 
 
-def res_list_page(code=ResponseCode.SUCCESS, msg='成功', data=None, count=None, current_page=None):
+def res_list_page(code=ResponseCode.SUCCESS, msg='成功', data=None, count=None, current_page=None, per_page=20):
     """
     分页返回类型
     :param code:
     :param msg:
     :param data:
+    :param count: 数据总数
+    :param current_page:  当前页
+    :param per_page: 每页多少条数据
     :return:
     """
     result = {'status': code, 'message': msg}
@@ -41,4 +44,6 @@ def res_list_page(code=ResponseCode.SUCCESS, msg='成功', data=None, count=None
         result['count'] = count
     if current_page is not None:
         result['current_page'] = current_page
+    if per_page is not None:
+        result['per_page'] = per_page
     return jsonify(result)
